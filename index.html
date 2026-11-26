@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>你爱不爱我</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -16,8 +15,8 @@
                         night: '#080506',
                     },
                     fontFamily: {
-                        marry: ['"Great Vibes"', 'cursive'],
-                        serifCn: ['"Noto Serif SC"', 'serif'],
+                        marry: ['serif'],
+                        serifCn: ['serif'],
                     },
                 }
             }
@@ -53,8 +52,7 @@
         }
     </style>
 </head>
-<body class="bg-night text-gray-100 font-serifCn min-h-screen flex items-center justify-center bg-pattern overflow-x-hidden">
-    <!-- 主页面 -->
+<body class="bg-night text-gray-100 serifCn min-h-screen flex items-center justify-center bg-pattern overflow-x-hidden">
     <div id="mainBox" class="text-center p-8 md:p-12">
         <div class="mb-10">
             <h1 class="text-[clamp(2.4rem,6vw,4.2rem)] font-bold text-blood text-shadow-blood mb-4">
@@ -73,11 +71,10 @@
         </div>
     </div>
 
-    <!-- 玫瑰弹窗（同意） -->
     <div id="roseModal" class="fixed inset-0 bg-black/85 hidden z-50 flex items-center justify-center">
         <div class="rose-animate text-center px-6">
             <div class="text-8xl md:text-9xl mb-6">🌹</div>
-            <h2 class="text-[clamp(2.8rem,8vw,5rem)] font-marry text-blood text-shadow-blood">
+            <h2 class="text-[clamp(2.8rem,8vw,5rem)] font-bold text-blood text-shadow-blood">
                 Marry Me
             </h2>
             <p class="text-gray-200 mt-4 text-lg">血色玫瑰，予你永夜的浪漫</p >
@@ -85,15 +82,12 @@
         </div>
     </div>
 
-    <!-- 恐怖谷全屏（拒绝） -->
     <div id="hauntScreen" class="fixed inset-0 bg-black hidden z-50 overflow-hidden">
         <div id="hauntWrap" class="w-full h-full grid grid-cols-2 md:grid-cols-4 gap-1 p-2">
-            <!-- JS 填充文字 -->
         </div>
     </div>
 
     <script>
-        // 恐怖文字生成
         const hauntWrap = document.getElementById('hauntWrap');
         for(let i = 0; i < 40; i++) {
             const span = document.createElement('span');
@@ -103,7 +97,6 @@
             hauntWrap.appendChild(span);
         }
 
-        // 按钮绑定
         const roseModal = document.getElementById('roseModal');
         const hauntScreen = document.getElementById('hauntScreen');
         const btnYes = document.getElementById('btnYes');
