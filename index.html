@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你爱不爱我</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blood: '#990011',
+                        darkBlood: '#440008',
+                        night: '#080506',
+                    },
+                    fontFamily: {
+                        marry: ['"Great Vibes"', 'cursive'],
+                        serifCn: ['"Noto Serif SC"', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .bg-pattern {
+                background-image: radial-gradient(rgba(120,0,15,0.35) 1px, transparent 1px);
+                background-size: 24px 24px;
+            }
+            .text-shadow-blood {
+                text-shadow: 0 0 8px #ff2233, 0 0 16px #990011;
+            }
+            .border-glow {
+                box-shadow: 0 0 10px rgba(153,0,17,0.6);
+            }
+            .rose-animate {
+                animation: popIn 0.7s cubic-bezier(0.17,0.67,0.12,0.99);
+            }
+            .haunt-scroll {
+                animation: hauntFloat 2.2s infinite ease-in-out;
+            }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.2) rotate(-12deg); opacity: 0; }
+            60% { transform: scale(1.12) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        @keyframes hauntFloat {
+            0%,100% { transform: translateY(0px); opacity: 0.75; }
+            50% { transform: translateY(-14px); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-night text-gray-100 font-serifCn min-h-screen flex items-center justify-center bg-pattern overflow-x-hidden">
+    <!-- 主页面 -->
+    <div id="mainBox" class="text-center p-8 md:p-12">
+        <div class="mb-10">
+            <h1 class="text-[clamp(2.4rem,6vw,4.2rem)] font-bold text-blood text-shadow-blood mb-4">
+                你爱不爱我
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl">告诉我你的心意</p >
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+            <button id="btnYes" class="px-10 py-4 rounded-lg border border-blood border-glow hover:bg-blood hover:text-white transition-all duration-300 text-xl">
+                我爱你
+            </button>
+            <button id="btnNo" class="px-10 py-4 rounded-lg border border-gray-600 hover:bg-gray-800 transition-all duration-300 text-xl">
+                不爱
+            </button>
+        </div>
+    </div>
+
+    <!-- 玫瑰弹窗（同意） -->
+    <div id="roseModal" class="fixed inset-0 bg-black/85 hidden z-50 flex items-center justify-center">
+        <div class="rose-animate text-center px-6">
+            <div class="text-8xl md:text-9xl mb-6">🌹</div>
+            <h2 class="text-[clamp(2.8rem,8vw,5rem)] font-marry text-blood text-shadow-blood">
+                Marry Me
+            </h2>
+            <p class="text-gray-200 mt-4 text-lg">血色玫瑰，予你永夜的浪漫</p >
+            <button id="closeRose" class="mt-8 px-6 py-2 border border-blood hover:bg-blood rounded-md">关闭</button>
+        </div>
+    </div>
+
+    <!-- 恐怖谷全屏（拒绝） -->
+    <div id="hauntScreen" class="fixed inset-0 bg-black hidden z-50 overflow-hidden">
+        <div id="hauntWrap" class="w-full h-full grid grid-cols-2 md:grid-cols-4 gap-1 p-2">
+            <!-- JS 填充文字 -->
+        </div>
+    </div>
+
+    <script>
+        // 恐怖文字生成
+        const hauntWrap = document.getElementById('hauntWrap');
+        for(let i = 0; i < 40; i++) {
+            const span = document.createElement('span');
+            span.innerText = '你不爱我吗';
+            span.className = 'text-blood haunt-scroll text-center text-xl md:text-2xl font-bold';
+            span.style.animationDelay = `${Math.random() * 2.5}s`;
+            hauntWrap.appendChild(span);
+        }
+
+        // 按钮绑定
+        const roseModal = document.getElementById('roseModal');
+        const hauntScreen = document.getElementById('hauntScreen');
+        const btnYes = document.getElementById('btnYes');
+        const btnNo = document.getElementById('btnNo');
+        const closeRose = document.getElementById('closeRose');
+
+        btnYes.onclick = () => {
+            roseModal.classList.remove('hidden');
+        };
+        closeRose.onclick = () => {
+            roseModal.classList.add('hidden');
+        };
+
+        btnNo.onclick = () => {
+            hauntScreen.classList.remove('hidden');
+        };
+        hauntScreen.onclick = () => {
+            hauntScreen.classList.add('hidden');
+        };
+    </script>
+</body>
+</html>
